@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyNewTestApp</string>
+    <string name="item_list_title">Список товаров</string>
+    <string name="search_items">Поиск товаров</string>
+    <string name="delete_title">Удаление товара</string>
+    <string name="delete_text">Вы действительно хотите удалить выбранный товар?</string>
+    <string name="change_count_title">Количество товара</string>
+    <string name="in_warehouse">На складе</string>
+    <string name="date">Дата добавления</string>
+</resources>

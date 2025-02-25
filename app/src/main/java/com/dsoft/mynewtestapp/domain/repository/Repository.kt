@@ -1,0 +1,14 @@
+package com.dsoft.mynewtestapp.domain.repository
+
+import com.dsoft.mynewtestapp.domain.model.Item
+import kotlinx.coroutines.flow.Flow
+
+interface Repository {
+    suspend fun insertItems()
+
+    fun getAllItems(query: String): Flow<List<Item>>
+
+    suspend fun deleteItem(item: Item)
+
+    suspend fun insertItem(item: Item)
+}
