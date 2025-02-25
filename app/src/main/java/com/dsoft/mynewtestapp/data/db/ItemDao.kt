@@ -20,5 +20,5 @@ interface ItemDao {
     fun getItems(query: String): Flow<List<ItemDBO>>
 
     @Delete
-    fun deleteItem(item: ItemDBO)
+    suspend fun deleteItem(item: ItemDBO)
 }
