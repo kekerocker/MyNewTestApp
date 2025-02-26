@@ -7,4 +7,10 @@
     <string name="change_count_title">Количество товара</string>
     <string name="in_warehouse">На складе</string>
     <string name="date">Дата добавления</string>
+    <string name="accept">Принять</string>
+    <string name="decline">Отклонить</string>
+
+
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
