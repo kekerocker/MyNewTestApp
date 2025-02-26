@@ -9,7 +9,7 @@
     <string name="date">Дата добавления</string>
     <string name="accept">Принять</string>
     <string name="decline">Отклонить</string>
-
+    <string name="not_in_stock">Нет в наличии</string>
 
     <string name="yes">Да</string>
     <string name="no">Нет</string>

@@ -141,7 +141,7 @@ fun ItemCard(
                         fontWeight = FontWeight.W500,
                     )
                     Text(
-                        text = item.amount.toString(),
+                        text = if (item.amount == 0) stringResource(id = R.string.not_in_stock) else item.amount.toString(),
                         fontSize = 14.sp
                     )
                 }
