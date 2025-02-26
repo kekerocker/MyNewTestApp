@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -72,19 +71,20 @@ fun MainScreen(
                     )
                 )
             }
-            items(count = state.value.itemList.count()) { index ->
+            items(
+                count = state.value.itemList.count(),
+                key = { state.value.itemList[it].id }) { index ->
                 val currentItem = state.value.itemList[index]
-                key(currentItem.id) {
-                    ItemCard(
-                        item = currentItem,
-                        onDeleteEvent = { item ->
-                            viewModel.sendIntent(MainIntent.DeleteItem(item))
-                        },
-                        onCountChangeEvent = { item, count ->
-                            viewModel.sendIntent(MainIntent.ChangeCountItem(item, count))
-                        }
-                    )
-                }
+                ItemCard(
+                    modifier = Modifier.animateItem(),
+                    item = currentItem,
+                    onDeleteEvent = { item ->
+                        viewModel.sendIntent(MainIntent.DeleteItem(item))
+                    },
+                    onCountChangeEvent = { item, count ->
+                        viewModel.sendIntent(MainIntent.ChangeCountItem(item, count))
+                    }
+                )
             }
         }
 

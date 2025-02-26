@@ -37,6 +37,7 @@ import java.time.format.DateTimeFormatter
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ItemCard(
+    modifier: Modifier,
     item: Item,
     onDeleteEvent: (Item) -> Unit,
     onCountChangeEvent: (Item, Int) -> Unit
@@ -76,7 +77,7 @@ fun ItemCard(
     }
 
     Card(
-        modifier = Modifier,
+        modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(8.dp)
