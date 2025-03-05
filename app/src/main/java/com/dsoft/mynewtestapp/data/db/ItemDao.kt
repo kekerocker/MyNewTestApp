@@ -10,15 +10,18 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertItem(item: ItemDBO)
+    @Query("UPDATE item SET amount = :count WHERE id = :id")
+    suspend fun updateAmount(id: Int, count: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<ItemDBO>)
 
-    @Query("SELECT * FROM item WHERE (:query = '' OR name LIKE '%' || :query || '%')")
-    fun getItems(query: String): Flow<List<ItemDBO>>
+    @Query("SELECT * FROM item")
+    fun getItems(): Flow<List<ItemDBO>>
 
     @Delete
     suspend fun deleteItem(item: ItemDBO)
+
+    @Query("DELETE FROM item WHERE id = :id")
+    suspend fun deleteItemById(id: Int)
 }
