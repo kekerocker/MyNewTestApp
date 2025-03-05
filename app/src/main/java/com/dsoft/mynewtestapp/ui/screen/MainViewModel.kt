@@ -8,11 +8,12 @@ import com.dsoft.mynewtestapp.domain.usecase.GetItemFromDBUseCase
 import com.dsoft.mynewtestapp.domain.usecase.UpdateItemAmountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,15 +43,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun fetchItemsFromDB() {
         viewModelScope.launch(Dispatchers.IO) {
-            getItemFromDBUseCase()
-                .combine(queryFlow) { list, query ->
-                    list.filter { item ->
-                        item.name.lowercase().contains(query.lowercase(), ignoreCase = true)
-                    }
-                }
-                .collectLatest { list -> _itemFlow.update { it.copy(itemList = list) } }
+            queryFlow.flatMapLatest { query ->
+                getItemFromDBUseCase(query)
+            }.collectLatest { list ->
+                _itemFlow.update { it.copy(itemList = list) }
+            }
         }
     }
 

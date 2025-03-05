@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.map
 class RepositoryImpl(
     private val dao: ItemDao
 ) : Repository {
-    override fun getAllItems(): Flow<List<Item>> {
-        return dao.getItems().map { it.map(itemDBOtoDomain) }
+    override fun getAllItems(query: String): Flow<List<Item>> {
+        return dao.getItems(query).map { it.map(itemDBOtoDomain) }
     }
 
     override suspend fun deleteItem(item: Item) {

@@ -4,7 +4,7 @@ import com.dsoft.mynewtestapp.domain.model.Item
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    fun getAllItems(): Flow<List<Item>>
+    fun getAllItems(query: String): Flow<List<Item>>
 
     suspend fun deleteItem(item: Item)
 

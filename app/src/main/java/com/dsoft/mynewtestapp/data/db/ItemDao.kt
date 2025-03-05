@@ -16,8 +16,8 @@ interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<ItemDBO>)
 
-    @Query("SELECT * FROM item")
-    fun getItems(): Flow<List<ItemDBO>>
+    @Query("SELECT * FROM item WHERE (:query = '' OR name LIKE '%' || :query || '%')")
+    fun getItems(query: String): Flow<List<ItemDBO>>
 
     @Delete
     suspend fun deleteItem(item: ItemDBO)

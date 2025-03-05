@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetItemFromDBUseCase @Inject constructor(
     private val repository: Repository
 ) {
-    operator fun invoke(): Flow<List<Item>> {
-        return repository.getAllItems()
+    operator fun invoke(query: String): Flow<List<Item>> {
+        return repository.getAllItems(query)
     }
 }
