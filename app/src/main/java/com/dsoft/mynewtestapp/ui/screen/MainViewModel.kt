@@ -32,7 +32,7 @@ class MainViewModel @Inject constructor(
     private val queryFlow: StateFlow<String> = _queryFlow.asStateFlow()
 
     init {
-        fetchItemsFromDB()
+        observeItems()
     }
 
     fun sendIntent(intent: MainIntent) {
@@ -44,7 +44,7 @@ class MainViewModel @Inject constructor(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun fetchItemsFromDB() {
+    private fun observeItems() {
         viewModelScope.launch(Dispatchers.IO) {
             queryFlow.flatMapLatest { query ->
                 getItemFromDBUseCase(query)
